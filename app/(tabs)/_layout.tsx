@@ -1,26 +1,16 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {Link, Tabs} from 'expo-router';
-import {Image, Pressable, Text, View} from 'react-native';
+import {Tabs} from 'expo-router';
+import {Image} from 'react-native';
 
 import {useClientOnlyValue} from '@/components/useClientOnlyValue';
 import {LinearGradient} from 'expo-linear-gradient';
 import commonStyles from '@/constants/commonStyles';
-import {colors, gradientColors} from '@/constants/colors';
+import {gradientColors} from '@/constants/colors';
 import {TabBar, TabHeader} from '@/components/Tab';
 import tabData from '@/data/tabData';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{marginBottom: -3}} {...props} />;
-}
+import {size24} from '@/constants/metrics';
 
 export default function TabLayout() {
-  // const colorScheme = useColorScheme();
-
   return (
     <LinearGradient
       colors={gradientColors.background}
@@ -30,11 +20,6 @@ export default function TabLayout() {
       <Tabs
         tabBar={props => <TabBar {...props} />}
         screenOptions={{
-          // headerTransparent: true,
-          // tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-          // Disable the static render of the header on web
-          // to prevent a hydration error in React Navigation v6.
-          headerShown: useClientOnlyValue(false, true),
           sceneStyle: {backgroundColor: 'transparent'},
           header: props => <TabHeader {...props} />,
         }}>
@@ -46,6 +31,7 @@ export default function TabLayout() {
             iconInactive,
             headerShown,
             tabBarActiveBackgroundColor,
+            headerRightIcon,
           }) => (
             <Tabs.Screen
               key={name}
@@ -57,6 +43,12 @@ export default function TabLayout() {
                   <Image
                     source={focused ? iconActive : iconInactive}
                     style={{width: size, height: size}}
+                  />
+                ),
+                headerRight: () => (
+                  <Image
+                    source={headerRightIcon}
+                    style={{width: size24, height: size24}}
                   />
                 ),
                 tabBarActiveBackgroundColor,

@@ -12,6 +12,7 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  PropsWithChildren,
 } from 'react';
 
 export const NoteContext = createContext<{
@@ -22,9 +23,7 @@ export const NoteContext = createContext<{
   setNotes: () => {},
 });
 
-type NoteProviderProps = {
-  children: ReactNode;
-};
+type NoteProviderProps = PropsWithChildren<{}>;
 
 export const NoteProvider = ({children}: NoteProviderProps) => {
   const [noteData, setNoteData] = useState<Array<NoteConfig & {items: Note[]}>>(
@@ -56,13 +55,6 @@ export const useNote = () => {
   }
 
   const getLatestNotes = (notes: Note[]) => {
-    console.log(
-      '->',
-      notes
-        .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
-        .slice(0, 3),
-    );
-
     const sortedNotes = notes.sort(
       (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
     );

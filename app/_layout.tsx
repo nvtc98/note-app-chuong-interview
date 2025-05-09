@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import {NoteProvider} from '@/hooks/noteContext';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {useFonts} from 'expo-font';
@@ -49,9 +50,21 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        header({navigation, options, route}) {
+          return <Header title={options.title || route.name} showBack />;
+        },
+        headerTransparent: true,
+      }}>
       <Stack.Screen name="(tabs)" options={{headerShown: false}} />
-      <Stack.Screen name="modal" options={{presentation: 'modal'}} />
+      <Stack.Screen
+        name="add"
+        options={{
+          title: 'New note',
+          presentation: 'card',
+        }}
+      />
     </Stack>
   );
 }

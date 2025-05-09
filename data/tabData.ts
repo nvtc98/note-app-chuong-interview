@@ -6,8 +6,10 @@ type TabConfig = {
   title?: string;
   iconActive: ImageSourcePropType;
   iconInactive: ImageSourcePropType;
+  headerRightIcon?: ImageSourcePropType;
   headerShown?: boolean;
   tabBarActiveBackgroundColor?: string;
+  destination?: string;
 };
 
 const tabData: TabConfig[] = [
@@ -16,9 +18,11 @@ const tabData: TabConfig[] = [
     title: 'Home',
     iconActive: require('@/assets/images/tabs/home-active.png'),
     iconInactive: require('@/assets/images/tabs/home-inactive.png'),
+    headerRightIcon: require('@/assets/images/hexagon.png'),
   },
   {
-    name: 'add',
+    name: 'addDummy',
+    destination: 'add', // Used to navigate to the Add screen on Stack for better animation
     iconActive: require('@/assets/images/tabs/add.png'),
     iconInactive: require('@/assets/images/tabs/add.png'),
   },

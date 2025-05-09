@@ -5,6 +5,7 @@ import {
   size18,
   size20,
   spacing12,
+  spacing20,
   spacing27,
   spacing4,
   spacing8,
@@ -18,7 +19,7 @@ export default function Home() {
 
   return (
     <View style={commonStyles.container}>
-      <ScrollView style={{padding: size20}}>
+      <ScrollView style={{padding: spacing20}}>
         <View style={commonStyles.row}>
           <Ionicons
             name="time-outline"

@@ -10,6 +10,7 @@ const colors: AppColors = {
   boxBorder: '#FFFFFF1F',
   tabInactive: '#918DAC',
   highlight: '#F94695',
+  textPlaceholder: '#FFFFFFE5',
 };
 
 const gradientColors: GradientColors = {

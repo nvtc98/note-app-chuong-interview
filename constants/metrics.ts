@@ -15,6 +15,7 @@ export const size24: number = 24;
 export const size36: number = 36;
 export const size48: number = 48;
 export const size50: number = 50;
+export const size260: number = 260;
 
 export const radius16: number = 16;
 export const radius20: number = 20;
