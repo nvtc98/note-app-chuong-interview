@@ -1,11 +1,14 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {Link, Tabs} from 'expo-router';
-import {Image, Pressable} from 'react-native';
+import {Image, Pressable, Text, View} from 'react-native';
 
-import Colors from '@/constants/colors';
-import {useColorScheme} from '@/components/useColorScheme';
 import {useClientOnlyValue} from '@/components/useClientOnlyValue';
+import {LinearGradient} from 'expo-linear-gradient';
+import styles from '@/constants/styles';
+import {colors, gradientColors} from '@/constants/colors';
+import {TabBar, TabHeader} from '@/components/Tab';
+import tabData from '@/data/tabData';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -16,76 +19,42 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      {/* <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      /> */}
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({color}) => (
-            <Image source={require('../../assets/images/setting.png')} />
-          ),
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({pressed}) => (
-                  // <FontAwesome
-                  //   name="info-circle"
-                  //   size={25}
-                  //   color={Colors[colorScheme ?? 'light'].text}
-                  //   style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  // />
-                  <Image
-                    source={require('../../assets/images/setting.png')}
-                    style={{
-                      marginRight: 15,
-                      opacity: pressed ? 0.5 : 1,
-                      width: 24,
-                      height: 24,
-                    }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({color}) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </Tabs>
+    <LinearGradient
+      colors={gradientColors.background}
+      style={styles.container}
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 1}}>
+      <Tabs
+        tabBar={props => <TabBar {...props} />}
+        screenOptions={{
+          // headerTransparent: true,
+          // tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          // Disable the static render of the header on web
+          // to prevent a hydration error in React Navigation v6.
+          headerShown: useClientOnlyValue(false, true),
+          sceneStyle: {backgroundColor: 'transparent'},
+          header: props => <TabHeader {...props} />,
+        }}>
+        {tabData.map(({name, title, iconActive, iconInactive, headerShown}) => (
+          <Tabs.Screen
+            key={name}
+            name={name}
+            options={{
+              title,
+              headerShown: headerShown ?? true,
+              tabBarIcon: ({focused, size}) => (
+                <Image
+                  source={focused ? iconActive : iconInactive}
+                  style={{width: size, height: size}}
+                />
+              ),
+            }}
+          />
+        ))}
+      </Tabs>
+    </LinearGradient>
   );
 }

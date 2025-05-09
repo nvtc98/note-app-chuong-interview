@@ -1,5 +1,6 @@
-import {Image, ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 
+import {LinearGradient} from 'expo-linear-gradient';
 import styles from '@/constants/styles';
 import {
   size18,
@@ -15,7 +16,11 @@ import initialData from '@/data/initialData';
 
 export default function Home() {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: 'transparent'}]}>
+      {/* <LinearGradient
+        // Background Linear Gradient
+        colors={['#1B284F', '#351159', '#421C45', '#3B184E']}
+        style={styles.container}> */}
       <ScrollView style={{padding: size20}}>
         <View style={styles.row}>
           <Ionicons
@@ -69,6 +74,7 @@ export default function Home() {
           </View>
         ))}
       </ScrollView>
+      {/* </LinearGradient> */}
     </View>
   );
 }

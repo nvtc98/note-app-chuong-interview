@@ -1,12 +1,17 @@
 import {StyleSheet} from 'react-native';
-import colors from './colors';
-import {radius16} from './spacing';
+import {colors} from './colors';
+import {radius16} from './metrics';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  title: {
+  headerText: {
+    color: colors.textPrimary,
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  titleText: {
     color: colors.textPrimary,
     fontSize: 16,
     fontWeight: '400',
@@ -15,6 +20,10 @@ export default StyleSheet.create({
     color: colors.textPrimary,
     fontSize: 14,
     fontWeight: '400',
+  },
+  tabTitleText: {
+    fontSize: 12,
+    fontWeight: '500',
   },
   row: {
     flexDirection: 'row',
@@ -29,5 +38,14 @@ export default StyleSheet.create({
   },
   flex1: {
     flex: 1,
+  },
+  spaceBetween: {
+    justifyContent: 'space-between',
+  },
+  spaceEvenly: {
+    justifyContent: 'space-evenly',
+  },
+  alignCenter: {
+    alignItems: 'center',
   },
 });
