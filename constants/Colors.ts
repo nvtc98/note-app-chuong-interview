@@ -16,4 +16,8 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
+  textPrimary: '#FFF',
+  textSecondary: '#FFFFFFB2',
+  box: '#FFFFFF0D',
+  boxBorder: '#FFFFFF1F',
 };
