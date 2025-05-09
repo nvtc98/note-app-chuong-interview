@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors} from './colors';
-import {radius16} from './metrics';
+import {radius16, spacing16} from './metrics';
 
 export default StyleSheet.create({
   container: {
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     borderColor: colors.boxBorder,
     borderWidth: 1,
     borderRadius: radius16,
-    padding: 16,
+    padding: spacing16,
   },
   flex1: {
     flex: 1,

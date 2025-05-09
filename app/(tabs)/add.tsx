@@ -1,7 +1,7 @@
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {LinearGradient} from 'expo-linear-gradient';
-import styles from '@/constants/styles';
+import commonStyles from '@/constants/commonStyles';
 import {
   size18,
   size20,

@@ -1,3 +1,4 @@
+import {colors} from '@/constants/colors';
 import {ImageSourcePropType} from 'react-native';
 
 type TabConfig = {
@@ -6,6 +7,7 @@ type TabConfig = {
   iconActive: ImageSourcePropType;
   iconInactive: ImageSourcePropType;
   headerShown?: boolean;
+  tabBarActiveBackgroundColor?: string;
 };
 
 const tabData: TabConfig[] = [
@@ -26,6 +28,7 @@ const tabData: TabConfig[] = [
     iconActive: require('@/assets/images/tabs/summary-active.png'),
     iconInactive: require('@/assets/images/tabs/summary-inactive.png'),
     headerShown: false,
+    tabBarActiveBackgroundColor: colors.box, // Special handling for the Summary screen because its screen content overlaps with colors.box
   },
 ];
 

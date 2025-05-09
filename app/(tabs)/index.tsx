@@ -1,6 +1,6 @@
 import {Image, ScrollView, Text, View} from 'react-native';
 
-import styles from '@/constants/styles';
+import commonStyles from '@/constants/commonStyles';
 import {
   size18,
   size20,
@@ -15,9 +15,9 @@ import initialData from '@/data/initialData';
 
 export default function Home() {
   return (
-    <View style={styles.container}>
+    <View style={commonStyles.container}>
       <ScrollView style={{padding: size20}}>
-        <View style={styles.row}>
+        <View style={commonStyles.row}>
           <Ionicons
             name="time-outline"
             size={20}
@@ -25,7 +25,7 @@ export default function Home() {
           />
           <Text
             style={[
-              styles.titleText,
+              commonStyles.titleText,
               {marginLeft: spacing8, color: colors.textSecondary},
             ]}>
             Recently created notes
@@ -33,13 +33,13 @@ export default function Home() {
         </View>
         {initialData.map(category => (
           <View key={category.id} style={{marginTop: spacing27}}>
-            <View style={[styles.row, {marginBottom: spacing4}]}>
+            <View style={[commonStyles.row, {marginBottom: spacing4}]}>
               <Image
                 source={category.icon}
                 style={{width: size20, height: size20}}
                 resizeMode="contain"
               />
-              <Text style={[styles.titleText, {marginLeft: spacing8}]}>
+              <Text style={[commonStyles.titleText, {marginLeft: spacing8}]}>
                 {category.title}
               </Text>
             </View>
@@ -47,15 +47,20 @@ export default function Home() {
               <View
                 key={index}
                 style={[
-                  styles.boxContainer,
-                  styles.row,
+                  commonStyles.boxContainer,
+                  commonStyles.row,
                   {marginTop: spacing8},
                 ]}>
                 <Text
-                  style={[styles.text, styles.flex1, {marginLeft: spacing8}]}>
+                  style={[
+                    commonStyles.text,
+                    commonStyles.flex1,
+                    {marginLeft: spacing8},
+                  ]}>
                   {item}
                 </Text>
                 <Image
+                  // NOTE: use image because the icon has gradient
                   source={require('@/assets/images/chevron-right-highlight.png')}
                   style={{
                     width: size18,
