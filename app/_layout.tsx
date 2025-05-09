@@ -1,3 +1,4 @@
+import {NoteProvider} from '@/hooks/noteContext';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {useFonts} from 'expo-font';
 import {Stack} from 'expo-router';
@@ -39,7 +40,11 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <NoteProvider>
+      <RootLayoutNav />
+    </NoteProvider>
+  );
 }
 
 function RootLayoutNav() {

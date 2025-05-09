@@ -11,9 +11,11 @@ import {
 } from '@/constants/metrics';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {colors} from '@/constants/colors';
-import initialData from '@/data/initialData';
+import {useNote} from '@/hooks/noteContext';
 
 export default function Home() {
+  const {noteData, getLatestNotes} = useNote();
+
   return (
     <View style={commonStyles.container}>
       <ScrollView style={{padding: size20}}>
@@ -31,7 +33,7 @@ export default function Home() {
             Recently created notes
           </Text>
         </View>
-        {initialData.map(category => (
+        {noteData.map(category => (
           <View key={category.id} style={{marginTop: spacing27}}>
             <View style={[commonStyles.row, {marginBottom: spacing4}]}>
               <Image
@@ -43,7 +45,7 @@ export default function Home() {
                 {category.title}
               </Text>
             </View>
-            {category.items.map((item, index) => (
+            {getLatestNotes(category.items).map((item, index) => (
               <View
                 key={index}
                 style={[
@@ -57,7 +59,7 @@ export default function Home() {
                     commonStyles.flex1,
                     {marginLeft: spacing8},
                   ]}>
-                  {item}
+                  {item.content}
                 </Text>
                 <Image
                   // NOTE: use image because the icon has gradient

@@ -12,7 +12,7 @@ import {
 } from '@/constants/metrics';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {colors} from '@/constants/colors';
-import initialData from '@/data/initialData';
+import initialData from '@/data/noteConfigData';
 
 export default function Home() {
   return (

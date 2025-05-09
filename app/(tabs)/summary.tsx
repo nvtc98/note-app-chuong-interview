@@ -19,12 +19,14 @@ import {
 } from '@/constants/metrics';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {colors} from '@/constants/colors';
-import initialData from '@/data/initialData';
+import initialData from '@/data/noteConfigData';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Button from '@/components/Button';
+import {useNote} from '@/hooks/noteContext';
 
 export default function Summary() {
   const {top} = useSafeAreaInsets();
+  const {noteData} = useNote();
 
   return (
     <View style={commonStyles.container}>
@@ -53,24 +55,23 @@ export default function Summary() {
           borderTopLeftRadius: radius20,
           borderTopRightRadius: radius20,
         }}>
-        {/* thêm key */}
-        {[1, 2, 3].map((category, index) => (
-          <View style={{marginTop: index ? spacing24 : 0}}>
+        {noteData.map((category, index) => (
+          <View key={category.id} style={{marginTop: index ? spacing24 : 0}}>
             <View style={[commonStyles.row]}>
               <View style={[commonStyles.row, commonStyles.flex1]}>
                 <Image
-                  source={require('@/assets/images/life-person.png')}
+                  source={category.personIcon}
                   style={{width: size48, height: size48}}
                 />
                 <Text style={[commonStyles.titleText, {marginLeft: spacing4}]}>
-                  Work and study
+                  {category.title}
                 </Text>
               </View>
               <Button title="Detail" onPress={() => {}} />
             </View>
             <View style={[{marginTop: spacing12}, commonStyles.boxContainer]}>
               <Text style={[commonStyles.text, {color: colors.textSecondary}]}>
-                This topic has a total of 50 records.
+                This topic has a total of {category.items.length} records.
               </Text>
             </View>
           </View>
