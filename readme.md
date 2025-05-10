@@ -1,8 +1,4 @@
-# 📱 Expo React Native App
-
-A mobile application built with [Expo](https://expo.dev) and [React Native](https://reactnative.dev), featuring modern navigation and UI.
-
----
+# 📱 React Native Note App For Technical Test
 
 ## 🛠️ Runtime Environment & SDK Versions
 
