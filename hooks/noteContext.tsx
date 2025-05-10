@@ -6,21 +6,18 @@ import NoteConfigData, {
 import NoteList, {Note} from '@/data/noteList';
 import {
   createContext,
-  ReactNode,
   useContext,
   useState,
-  Dispatch,
-  SetStateAction,
   useEffect,
   PropsWithChildren,
 } from 'react';
 
 export const NoteContext = createContext<{
   noteData: Array<NoteConfig & {items: Note[]}>;
-  setNotes: Dispatch<SetStateAction<(NoteConfig & {items: Note[]})[]>>;
+  addNote: (note: Note) => void;
 }>({
   noteData: [],
-  setNotes: () => {},
+  addNote: () => {},
 });
 
 type NoteProviderProps = PropsWithChildren<{}>;
@@ -41,8 +38,23 @@ export const NoteProvider = ({children}: NoteProviderProps) => {
 
   useEffect(loadData, []);
 
+  console.log('note', JSON.stringify(noteData, null, 2));
+
+  const addNote = (note: Note) => {
+    const newNoteData = noteData.map(config => {
+      if (config.id === note.categoryId) {
+        return {
+          ...config,
+          items: [...config.items, note],
+        };
+      }
+      return config;
+    });
+    setNoteData(newNoteData);
+  };
+
   return (
-    <NoteContext.Provider value={{noteData, setNotes: setNoteData}}>
+    <NoteContext.Provider value={{noteData, addNote}}>
       {children}
     </NoteContext.Provider>
   );

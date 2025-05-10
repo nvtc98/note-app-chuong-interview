@@ -45,7 +45,13 @@ export default StyleSheet.create({
   spaceEvenly: {
     justifyContent: 'space-evenly',
   },
+  justifyCenter: {
+    justifyContent: 'center',
+  },
   alignCenter: {
     alignItems: 'center',
+  },
+  absolute: {
+    position: 'absolute',
   },
 });

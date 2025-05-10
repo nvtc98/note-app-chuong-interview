@@ -7,6 +7,7 @@ export const spacing20: number = 20;
 export const spacing22: number = 22;
 export const spacing24: number = 24;
 export const spacing27: number = 27;
+export const spacing33: number = 33;
 
 export const size18: number = 18;
 export const size20: number = 20;

@@ -20,10 +20,14 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({title, onPress, style, textStyle}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} style={style}>
       <LinearGradient
         colors={gradientColors.button}
-        style={[styles.button, style]}>
+        style={[
+          commonStyles.justifyCenter,
+          commonStyles.alignCenter,
+          styles.button,
+        ]}>
         <Text style={[styles.text, textStyle]}>{title}</Text>
       </LinearGradient>
     </TouchableOpacity>
