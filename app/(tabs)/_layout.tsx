@@ -1,14 +1,13 @@
 import React from 'react';
-import {Tabs} from 'expo-router';
-import {Image} from 'react-native';
+import {router, Tabs} from 'expo-router';
+import {Image, TouchableOpacity} from 'react-native';
 
-import {useClientOnlyValue} from '@/components/useClientOnlyValue';
 import {LinearGradient} from 'expo-linear-gradient';
 import commonStyles from '@/constants/commonStyles';
 import {gradientColors} from '@/constants/colors';
 import {TabBar, TabHeader} from '@/components/Tab';
 import tabData from '@/data/tabData';
-import {size24} from '@/constants/metrics';
+import {size24, spacing20} from '@/constants/metrics';
 
 export default function TabLayout() {
   return (
@@ -32,6 +31,7 @@ export default function TabLayout() {
             headerShown,
             tabBarActiveBackgroundColor,
             headerRightIcon,
+            headerRightAction,
           }) => (
             <Tabs.Screen
               key={name}
@@ -46,10 +46,19 @@ export default function TabLayout() {
                   />
                 ),
                 headerRight: () => (
-                  <Image
-                    source={headerRightIcon}
-                    style={{width: size24, height: size24}}
-                  />
+                  <TouchableOpacity
+                    hitSlop={{
+                      top: spacing20,
+                      bottom: spacing20,
+                      left: spacing20,
+                      right: spacing20,
+                    }}
+                    onPress={() => router.push(`/${headerRightAction}` as any)}>
+                    <Image
+                      source={headerRightIcon}
+                      style={{width: size24, height: size24}}
+                    />
+                  </TouchableOpacity>
                 ),
                 tabBarActiveBackgroundColor,
               }}

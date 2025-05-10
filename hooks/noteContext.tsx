@@ -14,10 +14,18 @@ import {
 
 export const NoteContext = createContext<{
   noteData: Array<NoteConfig & {items: Note[]}>;
-  addNote: (note: Note) => void;
+  setNoteData: React.Dispatch<
+    React.SetStateAction<
+      (NoteConfig & {
+        items: Note[];
+      })[]
+    >
+  >;
+  initData: () => void;
 }>({
   noteData: [],
-  addNote: () => {},
+  setNoteData: () => {},
+  initData: () => {},
 });
 
 type NoteProviderProps = PropsWithChildren<{}>;
@@ -27,7 +35,7 @@ export const NoteProvider = ({children}: NoteProviderProps) => {
     [],
   );
 
-  const loadData = () => {
+  const initData = () => {
     setNoteData(
       NoteConfigData.map(config => ({
         ...config,
@@ -36,25 +44,10 @@ export const NoteProvider = ({children}: NoteProviderProps) => {
     );
   };
 
-  useEffect(loadData, []);
-
-  console.log('note', JSON.stringify(noteData, null, 2));
-
-  const addNote = (note: Note) => {
-    const newNoteData = noteData.map(config => {
-      if (config.id === note.categoryId) {
-        return {
-          ...config,
-          items: [...config.items, note],
-        };
-      }
-      return config;
-    });
-    setNoteData(newNoteData);
-  };
+  useEffect(initData, []);
 
   return (
-    <NoteContext.Provider value={{noteData, addNote}}>
+    <NoteContext.Provider value={{noteData, setNoteData, initData}}>
       {children}
     </NoteContext.Provider>
   );
@@ -65,6 +58,7 @@ export const useNote = () => {
   if (context === undefined) {
     throw new Error('useNote must be used within a NoteProvider');
   }
+  const {noteData, setNoteData, initData} = context;
 
   const getLatestNotes = (notes: Note[]) => {
     const sortedNotes = notes.sort(
@@ -81,5 +75,23 @@ export const useNote = () => {
     return latestNotesWithContent;
   };
 
-  return {...context, getLatestNotes};
+  const addNote = (note: Note) => {
+    const newNoteData = noteData.map(config => {
+      if (config.id === note.categoryId) {
+        return {
+          ...config,
+          items: [...config.items, note],
+        };
+      }
+      return config;
+    });
+    setNoteData(newNoteData);
+  };
+
+  const clearAllNotes = () => {
+    // setNoteData([]);
+    initData();
+  };
+
+  return {...context, getLatestNotes, addNote, clearAllNotes};
 };

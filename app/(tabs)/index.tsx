@@ -46,9 +46,9 @@ export default function Home() {
                 {category.title}
               </Text>
             </View>
-            {getLatestNotes(category.items).map((item, index) => (
+            {getLatestNotes(category.items).map(item => (
               <View
-                key={index}
+                key={item.time}
                 style={[
                   commonStyles.boxContainer,
                   commonStyles.row,

@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import {useNote} from './noteContext';
 import {Note} from '@/data/noteList';
 import {router} from 'expo-router';
+import {useToast} from './toastContext';
 
 const optionList = noteConfigData.map(config => ({
   value: config.id,
@@ -12,6 +13,7 @@ const optionList = noteConfigData.map(config => ({
 
 const useAddNote = () => {
   const {addNote} = useNote();
+  const {onShowToast} = useToast();
 
   const [text, setText] = useState<string>('');
   const [selectedOption, setSelectedOption] = useState<
@@ -23,7 +25,12 @@ const useAddNote = () => {
   };
 
   const onSaveNote = () => {
-    if (selectedOption === null || !text.length) {
+    if (selectedOption === null) {
+      onShowToast('Please Select A Category');
+      return;
+    }
+    if (!text.length) {
+      onShowToast('Please Input Note Content');
       return;
     }
     const node: Note = {

@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import {NoteProvider} from '@/hooks/noteContext';
+import {ToastProvider} from '@/hooks/toastContext';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {useFonts} from 'expo-font';
 import {Stack} from 'expo-router';
@@ -13,7 +14,6 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
 };
 
@@ -43,7 +43,9 @@ export default function RootLayout() {
 
   return (
     <NoteProvider>
-      <RootLayoutNav />
+      <ToastProvider>
+        <RootLayoutNav />
+      </ToastProvider>
     </NoteProvider>
   );
 }
@@ -62,7 +64,12 @@ function RootLayoutNav() {
         name="add"
         options={{
           title: 'New note',
-          presentation: 'card',
+        }}
+      />
+      <Stack.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
         }}
       />
     </Stack>

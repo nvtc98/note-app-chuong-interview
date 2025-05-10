@@ -10,6 +10,7 @@ type TabConfig = {
   headerShown?: boolean;
   tabBarActiveBackgroundColor?: string;
   destination?: string;
+  headerRightAction?: string;
 };
 
 const tabData: TabConfig[] = [
@@ -19,6 +20,7 @@ const tabData: TabConfig[] = [
     iconActive: require('@/assets/images/tabs/home-active.png'),
     iconInactive: require('@/assets/images/tabs/home-inactive.png'),
     headerRightIcon: require('@/assets/images/hexagon.png'),
+    headerRightAction: 'settings',
   },
   {
     name: 'addDummy',
