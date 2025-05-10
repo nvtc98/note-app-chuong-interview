@@ -1,4 +1,4 @@
-import {Image, ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 
 import commonStyles from '@/constants/commonStyles';
 import {
@@ -47,32 +47,33 @@ export default function Home() {
               </Text>
             </View>
             {getLatestNotes(category.items).map(item => (
-              <View
-                key={item.time}
-                style={[
-                  commonStyles.boxContainer,
-                  commonStyles.row,
-                  {marginTop: spacing8},
-                ]}>
-                <Text
+              <TouchableOpacity key={item.time}>
+                <View
                   style={[
-                    commonStyles.text,
-                    commonStyles.flex1,
-                    {marginLeft: spacing8},
+                    commonStyles.boxContainer,
+                    commonStyles.row,
+                    {marginTop: spacing8},
                   ]}>
-                  {item.content}
-                </Text>
-                <Image
-                  // NOTE: use image because the icon has gradient
-                  source={require('@/assets/images/chevron-right-highlight.png')}
-                  style={{
-                    width: size18,
-                    height: size18,
-                    marginLeft: spacing12,
-                  }}
-                  resizeMode="contain"
-                />
-              </View>
+                  <Text
+                    style={[
+                      commonStyles.text,
+                      commonStyles.flex1,
+                      {marginLeft: spacing8},
+                    ]}>
+                    {item.content}
+                  </Text>
+                  <Image
+                    // NOTE: use image because the icon has gradient
+                    source={require('@/assets/images/chevron-right-highlight.png')}
+                    style={{
+                      width: size18,
+                      height: size18,
+                      marginLeft: spacing12,
+                    }}
+                    resizeMode="contain"
+                  />
+                </View>
+              </TouchableOpacity>
             ))}
           </View>
         ))}

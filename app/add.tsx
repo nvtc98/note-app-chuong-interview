@@ -35,6 +35,7 @@ import Button from '@/components/Button';
 import Feather from '@expo/vector-icons/Feather';
 import useAddNote from '@/hooks/useAddNote';
 import Picker from '@/components/Picker';
+import normalize from 'react-native-normalize';
 
 const maxInputLength = 200;
 
@@ -53,7 +54,7 @@ export default function Add() {
       style={commonStyles.flex1}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <Background>
-        <ScrollView style={{padding: spacing20, marginTop: 120}}>
+        <ScrollView style={{padding: spacing20, marginTop: normalize(120)}}>
           <Picker
             placeholder="Choose a category"
             options={optionList}
@@ -87,7 +88,7 @@ export default function Add() {
             <Button
               title="Save"
               onPress={onSaveNote}
-              style={{height: 34, width: 200}}
+              style={{height: normalize(34), width: normalize(200)}}
             />
           </View>
         </Footer>

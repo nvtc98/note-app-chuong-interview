@@ -40,6 +40,7 @@ import settingsData from '@/data/settingsData';
 import {useNote} from '@/hooks/noteContext';
 import Toast from '@/components/Toast';
 import {useToast} from '@/hooks/toastContext';
+import normalize from 'react-native-normalize';
 
 export default function Settings() {
   const {clearAllNotes} = useNote();
@@ -53,7 +54,7 @@ been cleared`);
 
   return (
     <Background>
-      <ScrollView style={{padding: spacing20, marginTop: 120}}>
+      <ScrollView style={{padding: spacing20, marginTop: normalize(120)}}>
         <View style={{gap: spacing16}}>
           {settingsData.map(settingItem => (
             <TouchableOpacity key={settingItem.id}>
@@ -99,7 +100,7 @@ been cleared`);
             disabled={!!toastTitle}
             title="Delete All Notes"
             onPress={onClearAllNotes}
-            style={{height: 34, width: 200}}
+            style={{height: normalize(34), width: normalize(200)}}
             textStyle={commonStyles.text}
           />
         </View>
